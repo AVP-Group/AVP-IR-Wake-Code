@@ -11,7 +11,6 @@ class RetinaCellularAutomaton:
         self.H = height
         self.W = width
 
-        # ---- 论文中给出的固定参数 (Section 3.2) ----
         self.theta_p = 0.1
         self.g_p = 1.5
         self.sigma_h = 0.3
@@ -26,13 +25,11 @@ class RetinaCellularAutomaton:
         self.eta_m = 0.7
         self.gamma_p = 0.8
 
-        # ---- 固定卷积核 ----
         k1d = cv2.getGaussianKernel(3, 1.0)
         self.K_h = (k1d @ k1d.T).astype(np.float32)
         self.K_m = self._make_mexican_hat(size=5, sigma1=1.0,
                                           sigma2=2.0, w_surr=0.5)
 
-        # ---- 跨帧内部状态 ----
         self.reset()
 
     @staticmethod
